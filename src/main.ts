@@ -3,14 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { UserService } from './services/user.service';
-import { User } from './models/user.model';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'my-app',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
+  providers: [UserService],
   template: `
-    <h1>Hello from {{ name }}!</h1>
     <h1>Hello from {{ users | json }}!</h1>
     <a target="_blank" href="https://angular.io/start">
       Learn more about Angular
@@ -19,7 +19,7 @@ import { User } from './models/user.model';
 })
 export class App implements OnInit {
   name = 'Angular';
-  public users: User[];
+  public users: any[];
 
   constructor(private userService: UserService) {
     this.users = [];
